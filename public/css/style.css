@@ -288,4 +288,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Outfit',sans-serif
   from{transform:scale(1)}
   to{transform:scale(1.15)}
 }
-#timer-wrap.pulsing{animation:timerPulse .5s ease infinite alternate;}
+.timer-urgent #timer-num{color:#ef4444;animation:timerPulse .5s ease-in-out infinite alternate}
+
+/* ═══════════ COPYRIGHT FOOTER ═══════════ */
+.copyright-footer{
+  position: fixed;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 10000;
+}
