@@ -685,20 +685,25 @@ canvas.addEventListener('wheel',e=>{
 
 canvas.addEventListener('pointerdown',onPointerDown);
 
-// Touch pinch-zoom
+// Touch pinch-zoom and prevent defaults
 let pinchDist0=0, camZoom0=1;
 canvas.addEventListener('touchstart',e=>{
+  e.preventDefault();
   if(e.touches.length===2){
     pinchDist0=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
     camZoom0=G.cam.zoom;
   }
-},{passive:true});
+},{passive:false});
 canvas.addEventListener('touchmove',e=>{
   if(e.touches.length===2){
+    e.preventDefault();
     const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
     G.cam.zoom=Math.min(Math.max(camZoom0*(d/pinchDist0),0.35),5);
   }
-},{passive:true});
+},{passive:false});
+canvas.addEventListener('touchend',e=>{
+  e.preventDefault();
+},{passive:false});
 
 // ═══════════════════════════════════════════════════════════════
 //  CHAT
@@ -850,9 +855,32 @@ function spawnConfetti(color){
 // ═══════════════════════════════════════════════════════════════
 
 function initSocket(){
-  G.socket=io();
+  G.socket=io({
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    timeout: 20000
+  });
 
-  G.socket.on('connect',()=>{ G.myId=G.socket.id; });
+  G.socket.on('disconnect', () => {
+    toast('⚠ Disconnected! Reconnecting...', 5000);
+  });
+
+  G.socket.on('connect_error', () => {
+    toast('⚠ Connection lost. Trying to reconnect...', 3000);
+  });
+
+  G.socket.on('connect',()=>{
+    if(G.myId && G.myId !== G.socket.id) {
+       // We reconnected! Auto-rejoin if we were in a room
+       if(G.roomCode && G.screen !== 'menu') {
+          G.socket.emit('join-room', {code: G.roomCode, name: G.players.find(p=>p.idx===G.myIdx)?.name || 'Player'});
+          toast('✅ Reconnected to server!');
+       }
+    }
+    G.myId=G.socket.id;
+  });
 
   G.socket.on('room-created',({code,players,settings})=>{
     G.roomCode=code; G.players=players; G.settings=settings;
