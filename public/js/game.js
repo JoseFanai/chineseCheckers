@@ -691,6 +691,17 @@ canvas.addEventListener('touchend',e=>{
   e.preventDefault();
 },{passive:false});
 
+// Strict Document-Level Pinch/Zoom Override for Safari
+document.addEventListener('touchstart', e => {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+document.addEventListener('touchmove', e => {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+document.addEventListener('wheel', e => {
+  if (e.ctrlKey) e.preventDefault();
+}, { passive: false });
+
 // ═══════════════════════════════════════════════════════════════
 //  CHAT
 // ═══════════════════════════════════════════════════════════════
