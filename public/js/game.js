@@ -445,28 +445,14 @@ class MarbleAnim{
     const e=easeInOut(this.t);
     const x=pa.x+(pb.x-pa.x)*e;
     const y=pa.y+(pb.y-pa.y)*e;
-    // Parabolic arc
-    const S=getStep();
-    const arc=S*1.4*Math.sin(this.t*Math.PI);
-    return {x, y:y-arc};
+    return {x, y};
   }
 }
 
 function easeInOut(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
 
 function startLandBounce(r,c){
-  const k=ck(r,c);
-  G.landScales[k]=1.25;
-  let elapsed=0;
-  const DURATION=0.35;
-  const bounce=()=>{
-    elapsed+=0.016;
-    const t=Math.min(elapsed/DURATION,1);
-    G.landScales[k]=1+0.25*Math.sin(t*Math.PI);
-    if(t<1) requestAnimationFrame(bounce);
-    else delete G.landScales[k];
-  };
-  requestAnimationFrame(bounce);
+  // Removed landing bounce scaling to keep marble scale strictly fixed
 }
 
 function playAnimation(path,pi,onDone){
@@ -872,6 +858,9 @@ function initSocket(){
   });
 
   G.socket.on('connect',()=>{
+    const loadingScreen = document.getElementById('screen-loading');
+    if(loadingScreen) loadingScreen.classList.add('hidden');
+
     if(G.myId && G.myId !== G.socket.id) {
        // We reconnected! Auto-rejoin if we were in a room
        if(G.roomCode && G.screen !== 'menu') {
