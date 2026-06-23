@@ -113,6 +113,7 @@ function resizeCanvas(){
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 100));
 
 function logicalW(){ return canvas.width  / (window.devicePixelRatio||1); }
 function logicalH(){ return canvas.height / (window.devicePixelRatio||1); }
