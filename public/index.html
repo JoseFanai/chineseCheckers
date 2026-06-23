@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="description"
     content="Play Multiplayer Chinese Checkers online with friends. Create a room, share the code and play!" />
   <title>Chinese Checkers Online</title>
@@ -13,6 +14,11 @@
 </head>
 
 <body>
+  <!-- ════════════════════ LOADING SCREEN ════════════════════ -->
+  <div id="screen-loading" class="screen-loading">
+    <div class="spinner"></div>
+    <p>Connecting to Server...</p>
+  </div>
 
   <!-- ════════════════════ SCREEN: MENU ════════════════════ -->
   <div id="screen-menu" class="screen active">
@@ -214,6 +220,8 @@
   </div>
 
   <div id="toast" class="toast"></div>
+
+  <div class="copyright-footer">&copy; 2026 Jose Fanai. All rights reserved.</div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/game.js"></script>
