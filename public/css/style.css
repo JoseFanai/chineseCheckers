@@ -179,7 +179,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Outfit',sans-serif
 .canvas-wrap{grid-column:1;grid-row:2;position:relative;overflow:hidden;
   background:radial-gradient(ellipse at center,#0e0e2a 0%,#07071a 100%);cursor:grab}
 .canvas-wrap:active{cursor:grabbing}
-#game-canvas{display:block;width:100%;height:100%}
+#game-canvas{display:block;touch-action:none;width:100%;height:100%;outline:none;}
 #canvas-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
   background:rgba(0,0,0,0.6);color:var(--text2);font-size:.75rem;padding:5px 14px;
   border-radius:50px;pointer-events:none;backdrop-filter:blur(8px);white-space:nowrap}
