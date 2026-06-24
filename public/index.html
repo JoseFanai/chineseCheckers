@@ -6,8 +6,9 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="description"
-    content="Play Multiplayer Chinese Checkers online with friends. Create a room, share the code and play!" />
-  <title>Chinese Checkers Online</title>
+    content="Play Premium Multiplayer Chinese Checkers online with friends. Create a room, share the code and play on any device!" />
+  <meta name="theme-color" content="#080c18" />
+  <title>Chinese Checkers Online — Premium Multiplayer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
@@ -17,7 +18,7 @@
   <!-- ════════════════════ LOADING SCREEN ════════════════════ -->
   <div id="screen-loading" class="screen-loading">
     <div class="spinner"></div>
-    <p>Connecting to Server...</p>
+    <p>Connecting to Server…</p>
   </div>
 
   <!-- ════════════════════ SCREEN: MENU ════════════════════ -->
@@ -31,7 +32,7 @@
           <span class="lm" style="background:#2ecc71"></span>
           <span class="lm" style="background:#f1c40f"></span>
           <span class="lm" style="background:#a855f7"></span>
-          <span class="lm" style="background:#f97316"></span>
+          <span class="lm" style="background:#fffcf9"></span>
         </div>
         <h1>Chinese Checkers</h1>
         <p class="tagline">Premium Online Multiplayer</p>
@@ -40,7 +41,7 @@
         <div class="menu-card" id="card-host">
           <div class="card-icon">🎮</div>
           <h2>Host Game</h2>
-          <p>Create a private room and invite friends with a code</p>
+          <p>Create a private room and invite friends with a 6-digit code</p>
           <button id="btn-host" class="btn btn-primary">Create Room</button>
         </div>
         <div class="menu-card" id="card-join">
@@ -129,7 +130,7 @@
         <div class="hud-left">
           <span class="hud-logo">♟ CC Online</span>
           <button id="btn-leave-game" class="btn btn-ghost"
-            style="padding:4px 10px;font-size:0.75rem;border:1px solid var(--border)">Leave</button>
+            style="padding:4px 12px;font-size:0.75rem;border:1px solid var(--border)">Leave</button>
           <button id="btn-toggle-chat" class="btn-icon" title="Toggle Chat">💬</button>
           <button id="btn-toggle-audio" class="btn-icon" title="Toggle Audio">🔊</button>
         </div>
@@ -141,15 +142,16 @@
           <div id="timer-wrap">
             <svg id="timer-svg" viewBox="0 0 44 44">
               <circle class="timer-bg" cx="22" cy="22" r="18" />
-              <circle id="timer-ring" class="timer-ring" cx="22" cy="22" r="18" stroke-dasharray="113"
-                stroke-dashoffset="0" />
+              <circle id="timer-ring" class="timer-ring" cx="22" cy="22" r="18"
+                stroke-dasharray="113" stroke-dashoffset="0" />
             </svg>
             <span id="timer-num">30</span>
           </div>
           <div id="mid-turn-controls" style="display:none; gap:6px;">
-            <button id="btn-end-turn" class="btn btn-primary" style="padding:6px 12px;font-size:0.8rem">End
-              Turn</button>
-            <button id="btn-undo-turn" class="btn btn-secondary" style="padding:6px 12px;font-size:0.8rem">Undo</button>
+            <button id="btn-end-turn" class="btn btn-primary"
+              style="padding:6px 14px;font-size:0.8rem">End Turn</button>
+            <button id="btn-undo-turn" class="btn btn-secondary"
+              style="padding:6px 14px;font-size:0.8rem">Undo</button>
           </div>
         </div>
         <div class="hud-right">
@@ -186,7 +188,7 @@
       <input id="name-input" type="text" placeholder="Your name…" maxlength="20" autocomplete="off" />
       <div id="modal-join-code-row" style="display:none">
         <input id="code-input" type="text" placeholder="Room code…" maxlength="6" autocomplete="off"
-          style="text-transform:uppercase;letter-spacing:4px" />
+          style="text-transform:uppercase;letter-spacing:4px;width:100%" />
       </div>
       <p id="modal-error" class="modal-error"></p>
       <div class="modal-actions">
@@ -199,10 +201,10 @@
   <div id="modal-leave" class="modal-overlay" style="display:none">
     <div class="modal-box">
       <h2>Leave Game?</h2>
-      <p style="text-align:center; color:var(--text2)">Are you sure you want to disconnect and return to the Main Menu?
-      </p>
+      <p style="text-align:center; color:var(--text2)">Are you sure you want to disconnect and return to the Main Menu?</p>
       <div class="modal-actions">
-        <button id="btn-confirm-leave" class="btn btn-primary" style="background:#e74c3c">Yes, Leave</button>
+        <button id="btn-confirm-leave" class="btn btn-primary"
+          style="background:linear-gradient(135deg,#e74c3c,#c0392b)">Yes, Leave</button>
         <button id="btn-cancel-leave" class="btn btn-ghost">Cancel</button>
       </div>
     </div>
@@ -221,7 +223,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <div class="copyright-footer">&copy; 2026 Jose Fanai. All rights reserved.</div>
+  <div class="copyright-footer">© 2026 Jose Fanai. All rights reserved.</div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/game.js"></script>
