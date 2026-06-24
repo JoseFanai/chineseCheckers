@@ -350,6 +350,17 @@ io.on('connection',sock=>{
     if(room&&room.skipTurn(sock.id)) io.to(room.code).emit('turn-skipped',{turn:room.turn});
   });
 
+  // Client pressed "Play Again" — acknowledge (game state reset requires a new game start)
+  sock.on('return-to-lobby',()=>{
+    const room=rooms.get(sock.data.rc);
+    if(!room) return;
+    // Reset game state so players can start again
+    room.gameStarted=false; room.board=null;
+    room.turn=0; room.midTurnPiece=null; room.turnStartPos=null;
+    if(room.timerTimeout) clearTimeout(room.timerTimeout);
+    io.to(room.code).emit('player-joined',{name:'',players:room.pList()});
+  });
+
   sock.on('disconnect',()=>{
     console.log('- ',sock.id);
     const room=rooms.get(sock.data.rc);
